@@ -49,5 +49,5 @@ for (i in 1:nrow(param)){
   df<-rbind(df, sim)
 }
 
-write.csv(df, "C:\\Users\\megha\\Dropbox\\SESYNC\\SESYNC_RACs\\R Files\\SimCom_Sept28.csv")
-write.csv(df, "C:\\Users\\megha\\Dropbox\\SESYNC\\SESYNC_RACs\\R Files\\SimCom_May15_ShiftT.csv")
+sim<-df
+
