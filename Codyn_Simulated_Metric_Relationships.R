@@ -13,13 +13,14 @@ library(codyn)
 # for the sim dataset, communites are differentiated by alpha (richness), theta (evenness) and scenario (rate of turnover and spatial heterogeniety: four scenarios: a: high turnover, high spatial heterogeniety; b: low turnover, low spatial heterogeniety; c: low turnover, high spatial heterogeniety; d: high turnover, low spatial heterogeniety"). For each richness-evennes combination (9 combinations) there are each community type. Each of these 10 community types have 10 replicates, called "sites" at a given point in time. Each community type, time, and site is then replicated 10 time.
 
 #home
-sim<-read.csv("~/Dropbox/SESYNC/SESYNC_RACs/R Files/SimCom_Sept28.csv")%>%
+sim<-read.csv("~/Dropbox/SESYNC/SESYNC_RACs/R Files/Abundnace ")%>%
   mutate(time=as.numeric(iteration),
          id2=paste(id, site, sep="::"))%>%
   select(-X, -sample, -iteration)%>%
   separate(id, into=c("alpha","theta","scenario","rep"), sep="_", remove=F)%>%
   mutate(id3=paste(alpha, theta, scenario, sep="_"))
-  
+
+
 codyndat<-read.csv("~/Dropbox/CoDyn/R Files/11_06_2015_v7/relative cover_nceas and converge_12012015_cleaned.csv")%>%
   gather(species, abundance, sp1:sp99)%>%
   filter(site_code!="MISS")
@@ -888,3 +889,16 @@ beta_div<-gammadiv%>%
   group_by(comtype)%>%
   summarize(betadiv=mean(wbeta))
 
+
+###examples for the appendix
+Evar <- function(x, S = length(x)) {
+  x1 <- x[x!=0]
+  lnx <- log(x1)
+  theta <- (S - 1) / S * var(lnx)
+  return(1 - 2 / pi * atan(theta))
+} 
+
+t1=c(40,20,15,50,1,6,0,0)
+Evar(t1)
+t2=c(70,0,20,40,0,2,11,20)
+Evar(t2)
