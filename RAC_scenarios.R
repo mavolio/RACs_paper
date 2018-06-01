@@ -49,5 +49,3 @@ for (i in 1:nrow(param)){
   df<-rbind(df, sim)
 }
 
-sim<-df
-
