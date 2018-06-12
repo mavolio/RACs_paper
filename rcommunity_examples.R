@@ -3,6 +3,7 @@ library(tidyr)
 library(ggplot2)
 library(vegan)
 library(codyn)
+source('rcommunity_simulating_communities.R')
 
 ## Compare the relationship between evenness and richness
 ## across a range of parameter settings.
@@ -38,7 +39,6 @@ param <- param %>%
 param$theta <- factor(param$theta)
 ggplot(param, aes(x = avg_richness, y = avg_evenness, color = theta)) +
   geom_point() +
-  geom_line() +
   scale_y_continuous(limits = c(0, 1)) +
   scale_x_continuous(trans = 'log2') +
   facet_grid(beta ~ sigma, labeller = label_both)
@@ -92,10 +92,10 @@ param <- param[rep(seq_len(nrow(param)), each = 2), ]
 param <- cbind(param, do.call('rbind', sims))
 # visualize result
 param$theta <- factor(param$theta)
-ggplot(param, aes(x=across, y=avg_bray, fill=theta)) +
+ggplot(param, aes(x = across, y = avg_bray, fill = theta)) +
   facet_grid(beta ~ sigma, labeller = label_both) +
-  geom_boxplot() +
-  scale_y_continuous(limits=c(0, 1)) +
+  geom_boxplot(position = 'dodge') +
+  scale_y_continuous(limits = c(0, 1)) +
   xlab('Comparisons across ...') +
   ylab('Bray-Curtis Dissimilarity')
 # Observations: The main effect of increasing `sigma` is to increase

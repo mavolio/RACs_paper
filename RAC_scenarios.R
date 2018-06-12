@@ -3,6 +3,8 @@ library(tidyr)
 library(ggplot2)
 library(vegan)
 library(codyn)
+source('rcommunity_simulating_communities.R')
+
 ####TO USE
 #combining params and sim dataframes
 #make sites and iterations 10
