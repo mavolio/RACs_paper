@@ -5,7 +5,7 @@ library(grid)
 library(gtable)
 #library(gtools)
 library(devtools)
-install_github("NCEAS/codyn", ref = github_pull(83))
+install_github("NCEAS/codyn", ref = "anderson")
 library(codyn)
 
 # Read in Data ------------------------------------------------------------
@@ -127,7 +127,7 @@ codyndat_clean<-merge(codyndat, splist, by=c("site_code","project_name","communi
 
 
 # Richness Evenness Metrics -----------------------------------------------
-
+spc<-unique(codyndat_clean$site_project_comm)
 codyn_div_evar<-data.frame()
 
 for (i in 1:length(spc)){
@@ -216,7 +216,9 @@ codyndat_allmetrics<-codyn_multchange%>%
   left_join(codyndat_rac_change_average)%>%
   left_join(codyn_curvechange_mean)%>%
   left_join(codyndat_diversity_mean)%>%
-  left_join(codyndat_info)
+  left_join(codyndat_info)%>%
+  select(-ANPP)%>%
+  na.omit #remove 19 points for which multivariate compostion or dipsersion could not be calcualted
 
 
 # Making figure 4 --------------------------------------------------------
@@ -257,10 +259,8 @@ panel.hist <- function(x, ...)
 
 colnames(codyndat_allmetrics)# double check columns are correct
 #comparing absolute S and E changes
-pairs(codyndat_allmetrics[,c(35,36, 8:10, 3, 4, 11)], col=codyndat_allmetrics$taxa,upper.panel = panel.cor,diag.panel = panel.hist, cex.axis = 2)
+pairs(codyndat_allmetrics[,c(34,35, 8:10, 3, 4, 11)], col=codyndat_allmetrics$taxa,upper.panel = panel.cor,diag.panel = panel.hist, cex.axis = 2)
 par(xpd=T)
-
-
 
 # Make table 3 --------
 
