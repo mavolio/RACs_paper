@@ -5,7 +5,7 @@ library(grid)
 library(gtable)
 library(gtools)
 library(devtools)
-install_github("NCEAS/codyn", ref = github_pull(83))
+install_github("NCEAS/codyn", ref = "anderson")
 library(codyn)
 
 
@@ -184,8 +184,8 @@ sim_multchange_mean<-sim_mult_change%>%
   separate(id, into=c("alpha","theta","scenario","rep"), sep="_", remove=F)%>%
   mutate(id3=paste(alpha, theta, scenario, sep="_"))%>%
   group_by(id3, time, time2)%>%
-  summarize(composition_change=mean(composition_change),
-            dispersion_change=mean(dispersion_change))
+  summarize(composition_change=mean(composition_change, na.rm = T),
+            dispersion_change=mean(dispersion_change, na.rm =T))
 
 ## Curve change
 
@@ -217,7 +217,7 @@ sim_cc_ave<-sim_curve_change%>%
 # Difference Metrics ------------------------------------------------------
 
 sim_diff<-sim%>%
-  mutate(treatment = as.factor(ifelse(as.integer(site) <, "T1", "T2")))
+  mutate(treatment = as.factor(ifelse(as.integer(site) < 5, "T1", "T2")))
 
 #RAC diff
 sim_rac_diff<-data.frame()
@@ -263,8 +263,8 @@ sim_mult_diff_mean<-sim_mult_diff%>%
   separate(id, into=c("alpha","theta","scenario","rep"), sep="_", remove=F)%>%
   mutate(id3=paste(alpha, theta, scenario, sep="_"))%>%
   group_by(id3, time)%>%
-  summarize(composition_diff=mean(composition_diff),
-            abs_dispersion_diff=mean(abs_dispersion_diff))
+  summarize(composition_diff=mean(composition_diff, na.rm = T),
+            abs_dispersion_diff=mean(abs_dispersion_diff, na.rm=T))
 
 ###curve diff
 sim_curve_diff<-data.frame()
