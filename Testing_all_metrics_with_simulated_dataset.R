@@ -5,7 +5,7 @@ library(grid)
 library(gtable)
 library(gtools)
 library(devtools)
-install_github("NCEAS/codyn", ref = "anderson")
+install_github("NCEAS/codyn", ref = "sp_diff_test")
 library(codyn)
 
 
@@ -121,8 +121,8 @@ sim_div_tograph<-sim_diversity_mean%>%
 ggplot(data = sim_div_tograph, aes(x = Sp, y = Evar, color = scenario))+
   geom_point(size = 2)+
   scale_color_brewer(type = "div", name = "Community Type", labels = c("High Spatial, High Temporal", "Low Spatial, Low Temporal", "High Spatial, Low Temporal", "Low Spatial, High Temporal"))+
-  xlab("Simulated Community Richness")+
-  ylab("Simulated Community Evenness (Evar)")+
+  xlab("Simulated Species Richness")+
+  ylab("Simulated Evenness (Evar)")+
   theme(panel.grid = element_blank())
 
 
@@ -414,7 +414,7 @@ labels_change <-c(composition_change = "Composition Change",
 ggplot(data=sim_tograph, aes(x=as.factor(Sp), y=value, color = comtype))+
   geom_boxplot()+
   scale_color_manual(name = "Community Type", labels = c("High Spatial, High Temporal","Low Spatial, Low Temporal","High Spatial, Low Temporal","Low Spatial, High Temporal"), values= c("gold","orange","darkorange4","red"))+
-  xlab("Simulated Community Richness")+
+  xlab("Simulated Species Richness")+
   ylab("Measure Value")+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
   facet_wrap(~metric, ncol = 3, scales = "free", labeller = labeller(metric = labels_change))+
@@ -425,7 +425,7 @@ ggplot(data=sim_tograph, aes(x=as.factor(Sp), y=value, color = comtype))+
 ggplot(data=sim_tograph, aes(x=as.factor(even), y=value, color = comtype))+
   geom_boxplot()+
   scale_color_manual(name = "Community Type", labels = c("High Spatial, High Temporal","Low Spatial, Low Temporal","High Spatial, Low Temporal","Low Spatial, High Temporal"), values= c("gold","orange","darkorange4","red"))+
-  xlab("Simulated Community Evenness")+
+  xlab("Simulated  Evenness")+
   ylab("Measure Value")+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
   facet_wrap(~metric, ncol = 3, scales = "free", labeller = labeller(metric = labels_change))+
@@ -457,7 +457,7 @@ labels_diff <-c(composition_diff = "Composition Difference",
 ggplot(data=sim_diff_tograph, aes(x=as.factor(Sp), y=value, color = comtype))+
   geom_boxplot()+
   scale_color_manual(name = "Community Type", labels = c("High Spatial, High Temporal","Low Spatial, Low Temporal","High Spatial, Low Temporal","Low Spatial, High Temporal"), values= c("gold","orange","darkorange4","red"))+
-  xlab("Simulated Community Richness")+
+  xlab("Simulated Richness")+
   ylab("Measure Value")+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
   facet_wrap(~metric, ncol = 3, scales = "free", labeller = labeller(metric = labels_diff))+
@@ -468,7 +468,7 @@ ggplot(data=sim_diff_tograph, aes(x=as.factor(Sp), y=value, color = comtype))+
 ggplot(data=sim_diff_tograph, aes(x=as.factor(even), y=value, color = comtype))+
   geom_boxplot()+
   scale_color_manual(name = "Community Type", labels = c("High Spatial, High Temporal","Low Spatial, Low Temporal","High Spatial, Low Temporal","Low Spatial, High Temporal"), values= c("gold","orange","darkorange4","red"))+
-  xlab("Simulated Community Evenness")+
+  xlab("Simulated Evenness")+
   ylab("Measure Value")+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
   facet_wrap(~metric, ncol = 3, scales = "free", labeller = labeller(metric = labels_diff))+
