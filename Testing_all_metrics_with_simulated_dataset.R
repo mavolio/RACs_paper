@@ -21,7 +21,7 @@ sim<-df%>%#run rcommunity_simulating_communities.R then run RAC_scenarios, which
   separate(id, into=c("alpha","theta","scenario","rep"), sep="_", remove=F)%>%
   mutate(id3=paste(alpha, theta, scenario, sep="_"))
 
-# in the sim dataset, communites are differentiated by alpha (richness), theta (evenness) and scenario (rate of temporal and spatial variability: four scenarios: a: high temporal and high spatial variability; b: low temporal, low spatial variability; c: low temporal, high spatial variability; d: high temporal, low spatial variability"). For each richness-evennes combination (9 combinations) there are each community type. Each of these 10 community types have 10 replicates, called "sites" at a given point in time. Each community type, time, and site is then replicated 10 times.
+# in the sim dataset, communites are differentiated by alpha (richness), theta (evenness) and scenario (rate of temporal and spatial variability: four scenarios: a: high temporal and high spatial variability; b: low temporal, low spatial variability; c: low temporal, high spatial variability; d: high temporal, low spatial variability"). For each richness-evennes combination (9 combinations) there are each community type. Each of these 10 community types have 10 sample locations, called "sites" at a given point in time. Each community type, time, and site is then re-run 10 times creating 10 seperate datasets, denoted in the 'rep' column.
 
 
 # Making tables for Appendix 5 -----------------------------------------
@@ -413,9 +413,9 @@ labels_change <-c(composition_change = "Composition Change",
 #change with richness
 ggplot(data=sim_tograph, aes(x=as.factor(Sp), y=value, color = comtype))+
   geom_boxplot()+
-  scale_color_manual(name = "Community Type", labels = c("High Spatial, High Temporal","Low Spatial, Low Temporal","High Spatail, Low Temporal","Low Spatial, High Temporal"), values= c("gold","orange","darkorange4","red"))+
+  scale_color_manual(name = "Community Type", labels = c("High Spatial, High Temporal","Low Spatial, Low Temporal","High Spatial, Low Temporal","Low Spatial, High Temporal"), values= c("gold","orange","darkorange4","red"))+
   xlab("Simulated Community Richness")+
-  ylab("Metric Value")+
+  ylab("Measure Value")+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
   facet_wrap(~metric, ncol = 3, scales = "free", labeller = labeller(metric = labels_change))+
   theme(strip.background = element_rect(fill = 0))
@@ -424,9 +424,9 @@ ggplot(data=sim_tograph, aes(x=as.factor(Sp), y=value, color = comtype))+
 #change with evenness
 ggplot(data=sim_tograph, aes(x=as.factor(even), y=value, color = comtype))+
   geom_boxplot()+
-  scale_color_manual(name = "Community Type", labels = c("High Spatial, High Temporal","Low Spatial, Low Temporal","High Spatail, Low Temporal","Low Spatial, High Temporal"), values= c("gold","orange","darkorange4","red"))+
+  scale_color_manual(name = "Community Type", labels = c("High Spatial, High Temporal","Low Spatial, Low Temporal","High Spatial, Low Temporal","Low Spatial, High Temporal"), values= c("gold","orange","darkorange4","red"))+
   xlab("Simulated Community Evenness")+
-  ylab("Metric Value")+
+  ylab("Measure Value")+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
   facet_wrap(~metric, ncol = 3, scales = "free", labeller = labeller(metric = labels_change))+
   theme(strip.background = element_rect(fill = 0))+
@@ -456,9 +456,9 @@ labels_diff <-c(composition_diff = "Composition Difference",
 #diff with richness
 ggplot(data=sim_diff_tograph, aes(x=as.factor(Sp), y=value, color = comtype))+
   geom_boxplot()+
-  scale_color_manual(name = "Community Type", labels = c("High Spatial, High Temporal","Low Spatial, Low Temporal","High Spatail, Low Temporal","Low Spatial, High Temporal"), values= c("gold","orange","darkorange4","red"))+
+  scale_color_manual(name = "Community Type", labels = c("High Spatial, High Temporal","Low Spatial, Low Temporal","High Spatial, Low Temporal","Low Spatial, High Temporal"), values= c("gold","orange","darkorange4","red"))+
   xlab("Simulated Community Richness")+
-  ylab("Metric Value")+
+  ylab("Measure Value")+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
   facet_wrap(~metric, ncol = 3, scales = "free", labeller = labeller(metric = labels_diff))+
   theme(strip.background = element_rect(fill = 0))
@@ -467,9 +467,9 @@ ggplot(data=sim_diff_tograph, aes(x=as.factor(Sp), y=value, color = comtype))+
 #diff with evenness
 ggplot(data=sim_diff_tograph, aes(x=as.factor(even), y=value, color = comtype))+
   geom_boxplot()+
-  scale_color_manual(name = "Community Type", labels = c("High Spatial, High Temporal","Low Spatial, Low Temporal","High Spatail, Low Temporal","Low Spatial, High Temporal"), values= c("gold","orange","darkorange4","red"))+
+  scale_color_manual(name = "Community Type", labels = c("High Spatial, High Temporal","Low Spatial, Low Temporal","High Spatial, Low Temporal","Low Spatial, High Temporal"), values= c("gold","orange","darkorange4","red"))+
   xlab("Simulated Community Evenness")+
-  ylab("Metric Value")+
+  ylab("Measure Value")+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
   facet_wrap(~metric, ncol = 3, scales = "free", labeller = labeller(metric = labels_diff))+
   theme(strip.background = element_rect(fill = 0))+
