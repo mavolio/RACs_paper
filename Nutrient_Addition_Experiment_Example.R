@@ -6,7 +6,7 @@ library(gridExtra)
 library(grid)
 library(gtable)
 library(devtools)
-install_github("NCEAS/codyn", ref = "anderson")
+install_github("NCEAS/codyn", ref = "sp_diff_test")
 library(codyn)
 
 
