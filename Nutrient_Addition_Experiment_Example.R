@@ -10,7 +10,7 @@ install_github("NCEAS/codyn", ref = "sp_diff_test")
 library(codyn)
 
 
-theme_set(theme_bw(14))
+theme_set(theme_bw(12))
 
 # read in data ------------------------------------------------------------
 
@@ -256,7 +256,6 @@ C<-ggplot(data=subset(allmetrics, metric=="curve_change"), aes(x=Treatment, y=vm
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
 grid.arrange(S, E,R, G, L, C, ncol=3)
-
 
 # Making Appendix figure 7 of change/difference metrics for all years -------------------------
 allyears<-dat%>%
