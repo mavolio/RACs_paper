@@ -32,7 +32,7 @@ trts<-testyears%>%
   select(PlotID, Treatment)%>%
   unique()
 
-# Make Figure 5 -----------------------------------------------------------
+# Make Figure 5 and 6 and 7 -----------------------------------------------------------
 
 ###NMDS in Figure 5
 
@@ -86,7 +86,7 @@ ggplot(subset(toplot, Treatment=="n2p0"), aes(x=NMDS1, y=NMDS2, color=as.factor(
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), legend.position = "none")
 
 
-### Making Rank Abundance Curves for Figure 5
+### Making Rank Abundance Curves for Figure 6
 
 #label top three species in control plots blue, top 3 in N or N+P purple and top 3 in NP red.
 #top 3 control: ag, as, sn, top 3 n/np: os, sc, sm, do
@@ -94,7 +94,7 @@ ggplot(subset(toplot, Treatment=="n2p0"), aes(x=NMDS1, y=NMDS2, color=as.factor(
 ractoplot<-testyears%>%
   mutate(colorfill=ifelse(GenusSpecies=="andropogon gerardii","ag",ifelse(GenusSpecies=="andropogon scoparius","as", ifelse(GenusSpecies=="sorghastrum nutans", "sn", ifelse(GenusSpecies=="solidago canadensis","sc",ifelse(GenusSpecies=="solidago missouriensis", "sm", ifelse(GenusSpecies=="oxalis stricta", "os", ifelse(GenusSpecies=="dichanthelium oligosanthes","do","other"))))))))
 
-####make RACs graphs for figure 5
+####make RACs graphs for figure 6
 #contorls
 ggplot(data=subset(ractoplot, Treatment=="n1p0"&RecYear==2002), aes(x=rank, y=Abundance))+
    geom_line(aes(group=PlotID), color="darkgray", size=1)+
@@ -131,7 +131,7 @@ ggplot(data=subset(ractoplot, Treatment=="n2p0"&RecYear==2011), aes(x=rank, y=Ab
   scale_color_manual(values = c("blue","lightblue",'darkred',"pink","green3","orange","cornflowerblue"))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), legend.position = "none", axis.title.x = element_blank(), axis.title.y = element_blank())
 
-##Make Curve Change graphs for figure 5.
+##Make Curve Change graphs for figure 7.
 
 ###Getting relative rank and cumulative abundance to plot cumulative curves
 ccplot<-ractoplot%>%
@@ -178,7 +178,7 @@ ggplot(data=subset(ccplot, Treatment=="n2p0"), aes(x=relrank, y=cumabund, color=
   theme(strip.background = element_blank(),strip.text.x = element_blank())
 
 
-# doing RAC change and curve change anlayses for Figure 6 -------------------------------------------------------------
+# doing RAC change and curve change anlayses for Figure 8 -------------------------------------------------------------
 
 ##get RAC changes
 rac <- RAC_change(testyears, time.var = "RecYear", species.var = "GenusSpecies", abundance.var = "Abundance", replicate.var = "PlotID")
